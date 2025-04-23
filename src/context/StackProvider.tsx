@@ -14,7 +14,7 @@ import { StackActionContext, StackStateContext } from "./contexts";
  */
 export const StackProvider: React.FC<StackProviderProps> = ({
   children,
-  initialStack,
+  initialStack = [],
 }) => {
   const [stack, setStack] = useState<Activity[]>([]);
 

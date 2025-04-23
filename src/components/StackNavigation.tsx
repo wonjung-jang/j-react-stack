@@ -14,6 +14,13 @@ export const StackNavigation: React.FC<StackNavigationProps> = ({
   transitionDuration = 300,
   transitionTimingFunction = "ease-in-out",
 }) => {
+  // 런타임에 initialStack 체크
+  if (!initialStack || initialStack.length === 0) {
+    throw new Error(
+      "StackNavigation requires at least one item in initialStack"
+    );
+  }
+
   return (
     <StackProvider initialStack={initialStack}>
       <StackRenderer

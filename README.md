@@ -97,6 +97,21 @@ transitionDuration과 transitionTimingFunction 속성을 사용해 화면 전환
 />
 ```
 
+### 타입 사용법
+
+라이브러리는 TypeScript로 작성되어 있으며, 다음과 같은 타입을 제공합니다:
+
+```typescript
+// 기본 스택 아이템 타입
+import { StackItem } from "j-react-stack";
+
+// 예시
+const initialStack: StackItem[] = [{ key: "home", element: <HomeScreen /> }];
+
+// 더 자세한 타입이 필요한 경우
+import { Activity } from "j-react-stack";
+```
+
 ## 프로젝트 구조
 
 이 라이브러리는 단순하지만 강력한 API를 제공합니다. 핵심 컴포넌트는 다음과 같습니다:
