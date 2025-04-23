@@ -20,7 +20,7 @@ export const StackRenderer: React.FC<StackRendererProps> = ({
       style={{
         position: "relative",
         width: "100%",
-        height: "100%",
+        height: "auto",
         overflowX: "hidden",
       }}
     >
@@ -35,11 +35,11 @@ export const StackRenderer: React.FC<StackRendererProps> = ({
         }
 
         const style: React.CSSProperties = {
-          position: "absolute",
+          position: isLast ? "relative" : "absolute",
           top: 0,
           left: 0,
           width: "100%",
-          height: "100%",
+          height: "auto",
           transform,
           transition: `transform ${transitionDuration}ms ${transitionTimingFunction}`,
           pointerEvents: transition === "current" ? "auto" : "none",
