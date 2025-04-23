@@ -1,0 +1,497 @@
+/* 다크 모드 변수 */
+:root {
+  --background: #f8f9fa;
+  --card-bg: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #6c757d;
+  --accent: #0366d6;
+  --accent-hover: #0256b9;
+  --sidebar-bg: #ffffff;
+  --sidebar-text: #2c3e50;
+  --input-bg: #f8f9fa;
+  --input-border: #ddd;
+  --button-primary-bg: #0366d6;
+  --button-primary-text: white;
+  --button-secondary-bg: #f1f3f5;
+  --button-secondary-text: #495057;
+  --button-danger-bg: #f03e3e;
+  --button-danger-text: white;
+  --success-icon-bg: #37b24d;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --border-color: #e9ecef;
+  --code-bg: #f5f7fa;
+  --code-text: #1a1a1a;
+}
+
+[data-theme="dark"] {
+  --background: #1a1a1a;
+  --card-bg: #2c2c2c;
+  --text-primary: #e0e0e0;
+  --text-secondary: #adb5bd;
+  --accent: #4dabf7;
+  --accent-hover: #339af0;
+  --sidebar-bg: #2c2c2c;
+  --sidebar-text: #e0e0e0;
+  --input-bg: #3a3a3a;
+  --input-border: #555;
+  --button-primary-bg: #4dabf7;
+  --button-primary-text: #1a1a1a;
+  --button-secondary-bg: #555;
+  --button-secondary-text: #e0e0e0;
+  --button-danger-bg: #fa5252;
+  --button-danger-text: #1a1a1a;
+  --success-icon-bg: #40c057;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --border-color: #444;
+  --code-bg: #3a3a3a;
+  --code-text: #e0e0e0;
+}
+
+/* 전체 앱 스타일 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  background-color: var(--background);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.app {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.theme-toggle {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: var(--box-shadow);
+  transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+  background-color: var(--accent-hover);
+}
+
+.sidebar {
+  width: 250px;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 2rem 0;
+  box-shadow: var(--box-shadow);
+  overflow-y: auto;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar h1 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+  padding: 0 1rem;
+  padding-bottom: 1rem;
+  cursor: pointer;
+}
+
+.sidebar nav {
+  margin-top: 2rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 1rem;
+}
+
+.sidebar a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  padding: 0.7rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: rgba(3, 102, 214, 0.1);
+  color: var(--accent-hover);
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: var(--background);
+  overflow-y: auto;
+  transition: background-color 0.3s;
+}
+
+/* 페이지 컨테이너 */
+.page-container {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* 홈 페이지 스타일 */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.home-page h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+}
+
+.home-page p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.cta-button {
+  margin-top: 2rem;
+}
+
+.cta-button a {
+  display: inline-block;
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.cta-button a:hover {
+  background-color: var(--accent-hover);
+}
+
+/* 회원가입 페이지 스타일 */
+.registration-page {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  color: var(--text-secondary);
+}
+
+.stack-container {
+  position: relative;
+  min-height: 500px;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* 단계 화면 스타일 */
+.screen {
+  padding: 1.5rem;
+}
+
+.screen.step {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.screen h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  padding: 0.8rem;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: var(--accent);
+}
+
+.button-group {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-group button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.next-button {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+}
+
+.next-button:hover {
+  background-color: var(--accent-hover);
+}
+
+.back-button {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+}
+
+.back-button:hover {
+  background-color: var(--button-secondary-bg);
+  opacity: 0.9;
+}
+
+.reset-button {
+  background-color: var(--button-danger-bg);
+  color: var(--button-danger-text);
+}
+
+.reset-button:hover {
+  background-color: var(--button-danger-bg);
+  opacity: 0.9;
+}
+
+.success-message {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.success-message .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: var(--success-icon-bg);
+  color: white;
+  font-size: 2rem;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+}
+
+.home {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.details {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.more {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 2rem;
+  text-align: center;
+  max-width: 600px;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.clear-button {
+  background-color: #ff6347;
+}
+
+/* 새로운 레이아웃 스타일 */
+.registration-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.page-title {
+  padding: 1rem;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* 문서 페이지 스타일 */
+.docs-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.docs-page h1 {
+  font-size: 2.2rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.docs-section {
+  margin-bottom: 2.5rem;
+}
+
+.docs-section h2 {
+  font-size: 1.8rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.docs-section h3 {
+  font-size: 1.3rem;
+  margin: 1.5rem 0 0.8rem;
+  color: var(--accent);
+}
+
+.docs-section p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.code-block {
+  background-color: var(--code-bg);
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--code-text);
+}
+
+.code-block pre + pre {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+.use-cases {
+  list-style-position: inside;
+  padding-left: 1rem;
+}
+
+.use-cases li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.cta-links {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.cta-button-secondary {
+  display: inline-block;
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.cta-button-secondary:hover {
+  background-color: var(--button-secondary-bg);
+  opacity: 0.9;
+}

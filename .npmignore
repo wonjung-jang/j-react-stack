@@ -1,0 +1,29 @@
+# Source
+src
+
+# Config files
+.github
+tsconfig.json
+rollup.config.js
+.gitignore
+.eslintrc
+.eslintignore
+jest.config.js
+
+# Tests
+__tests__
+*.test.ts
+*.test.tsx
+
+# Examples
+examples
+
+# IDE
+.vscode
+.idea
+
+# Misc
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log* 
