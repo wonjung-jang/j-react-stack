@@ -1,8 +1,12 @@
-# J-React-Stack
+# 🧱 J-React-Stack
 
-J-React-Stack은 React 애플리케이션에서 스택 기반 네비게이션을 쉽게 구현할 수 있는 라이브러리입니다. 부드러운 전환 효과와 직관적인 API를 제공합니다.
+**J-React-Stack**은 React 애플리케이션에서 **스택 기반 네비게이션**을 쉽게 구현할 수 있는 경량 라이브러리입니다. 부드러운 전환 애니메이션과 직관적인 API를 제공합니다.
 
-## 설치
+> 단계별 입력 폼, 다단계 가입 화면, 마법사 스타일 UI 등에 최적화된 솔루션입니다.
+
+---
+
+## 📦 설치
 
 ```bash
 npm install j-react-stack
@@ -10,115 +14,137 @@ npm install j-react-stack
 yarn add j-react-stack
 ```
 
-## 주요 특징
+---
 
-- **부드러운 전환 애니메이션** - 화면 간 자연스러운 슬라이드 애니메이션
-- **직관적인 API** - 간단한 push/pop 기반 API
-- **타입스크립트 지원** - 완전한 타입 지원으로 개발 경험 향상
-- **초기 화면 필수 설정** - 스택에 항상 시작 화면이 있도록 보장
+## ✨ 주요 특징
 
-## 기본 사용법
+- 🎞 **부드러운 전환 애니메이션**
+- 🧭 **간단한 push/pop 네비게이션 API**
+- 💡 **TypeScript 완벽 지원**
+- 🛠 **초기 화면 필수 설정으로 안정성 확보**
 
-리액트 스택 네비게이터는 단일 페이지 내에서 여러 단계의 UI를 구현할 때 유용합니다. 주요 컴포넌트와 훅은 다음과 같습니다:
+---
 
-### StackNavigation 컴포넌트
+## 🚀 시작하기
 
-전체 스택 네비게이션 시스템을 구성하는 컴포넌트입니다.
+### `StackNavigation` 컴포넌트
 
-```jsx
+전체 네비게이션 시스템을 구성하는 컴포넌트입니다.
+
+```tsx
 import { StackNavigation } from "j-react-stack";
+import Step1Screen from "./Step1Screen";
 
-function MyComponent() {
+export default function App() {
   return (
     <StackNavigation
       initialStack={[{ key: "step1", element: <Step1Screen /> }]}
-      transitionDuration={300}
-      transitionTimingFunction="ease-in-out"
+      transitionDuration={300} // 기본값
+      transitionTimingFunction="ease-in-out" // 기본값
     />
   );
 }
 ```
 
-### useStackNavigation 훅
+> **주의**: `initialStack` 속성은 **반드시 하나 이상의 화면을 포함해야 합니다.**
 
-스택을 조작하기 위한 함수와 상태에 접근할 수 있는 훅입니다.
+#### 속성 (Props)
 
-```jsx
+| 속성                       | 타입   | 필수 | 기본값        | 설명                   |
+| -------------------------- | ------ | ---- | ------------- | ---------------------- |
+| `initialStack`             | 배열   | ✅   | -             | 초기 화면 스택         |
+| `transitionDuration`       | 숫자   | ❌   | 300           | 화면 전환 시간 (ms)    |
+| `transitionTimingFunction` | 문자열 | ❌   | "ease-in-out" | 애니메이션 타이밍 함수 |
+| `className`                | 문자열 | ❌   | ""            | 추가 CSS 클래스        |
+
+---
+
+### `useStackNavigation` 훅
+
+스택을 조작하고 상태를 제어할 수 있는 커스텀 훅입니다.
+
+```tsx
 import { useStackNavigation } from "j-react-stack";
+import NextStepScreen from "./NextStepScreen";
 
 function MyScreen() {
   const { push, pop, clear, stack } = useStackNavigation();
 
-  // 새 화면 추가
-  const goToNextStep = () => {
-    push({ key: "nextStep", element: <NextStepScreen /> });
-  };
-
-  // 이전 화면으로 돌아가기
-  const goBack = () => {
-    pop();
-  };
-
-  // 처음으로 돌아가기
-  const reset = () => {
-    clear();
-  };
-
   return (
     <div>
       <h2>현재 화면</h2>
-      <button onClick={goToNextStep}>다음</button>
-      <button onClick={goBack}>이전</button>
-      <button onClick={reset}>처음으로</button>
+      <button
+        onClick={() => push({ key: "next", element: <NextStepScreen /> })}
+      >
+        다음
+      </button>
+      <button onClick={pop}>이전</button>
+      <button onClick={clear}>처음으로</button>
     </div>
   );
 }
 ```
 
-## 활용 사례
+---
 
-- 다단계 회원가입 프로세스
-- 설문조사
-- 단계별 체크아웃 프로세스
-- 마법사(Wizard) 스타일 입력 폼
-- 단계별 튜토리얼
+## 🧰 API 개요
 
-## 고급 사용법
+| 메서드       | 설명                                            |
+| ------------ | ----------------------------------------------- |
+| `push(item)` | 새 화면을 스택에 추가합니다                     |
+| `pop()`      | 스택의 맨 위 화면을 제거하고 이전 화면으로 이동 |
+| `clear()`    | 스택을 초기 상태(`initialStack`)로 재설정       |
+| `stack`      | 현재 스택 상태 (배열 형태)                      |
+
+---
+
+## 🎯 활용 사례
+
+- 회원가입 단계 UI
+- 설문/투표 UI
+- 체크아웃 단계
+- 튜토리얼/온보딩
+- 멀티스텝 폼
+
+---
+
+## 🎨 고급 사용법
 
 ### 커스텀 트랜지션
 
-transitionDuration과 transitionTimingFunction 속성을 사용해 화면 전환 애니메이션을 커스터마이징할 수 있습니다.
-
-```jsx
+```tsx
 <StackNavigation
-  initialStack={[{ key: "initial", element: <InitialScreen /> }]}
-  transitionDuration={500}
-  transitionTimingFunction="cubic-bezier(0.68, -0.55, 0.27, 1.55)"
+  initialStack={[{ key: "home", element: <HomeScreen /> }]}
+  transitionDuration={500} // 기본값: 300
+  transitionTimingFunction="cubic-bezier(0.68, -0.55, 0.27, 1.55)" // 기본값: "ease-in-out"
 />
 ```
 
-### 타입 사용법
+---
 
-라이브러리는 TypeScript로 작성되어 있으며, 다음과 같은 타입을 제공합니다:
+### 타입 사용법 (TypeScript)
 
-```typescript
-// 기본 스택 아이템 타입
-import { StackItem } from "j-react-stack";
+```ts
+import { StackItem, Activity } from "j-react-stack";
 
-// 예시
-const initialStack: StackItem[] = [{ key: "home", element: <HomeScreen /> }];
+const stack: StackItem[] = [{ key: "main", element: <MainScreen /> }];
 
-// 더 자세한 타입이 필요한 경우
-import { Activity } from "j-react-stack";
+const activity: Activity = {
+  key: "form",
+  element: <FormScreen />,
+};
 ```
 
-## 프로젝트 구조
+---
 
-이 라이브러리는 단순하지만 강력한 API를 제공합니다. 핵심 컴포넌트는 다음과 같습니다:
+## 📁 프로젝트 구조
 
-- `StackNavigation`: Provider와 Renderer를 통합한 편리한 컴포넌트
-- `useStackNavigation`: 스택 상태와 액션을 한 번에 제공하는 훅
+- `StackNavigation`: Provider + Renderer를 통합한 루트 컴포넌트
+- `useStackNavigation`: 스택 조작과 상태를 제공하는 훅
+- `StackItem`, `Activity`: 커스텀 타입 지원
 
-## 라이선스
+---
 
-MIT
+## 📜 라이선스
+
+MIT License
