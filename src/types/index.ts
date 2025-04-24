@@ -51,6 +51,9 @@ export interface StackProviderProps {
 
 /**
  * 스택 렌더러 props
+ * @property className - CSS 클래스명 (일반 CSS 또는 Tailwind CSS 클래스 지원)
+ * @property transitionDuration - 화면 전환 애니메이션 시간 (ms)
+ * @property transitionTimingFunction - 화면 전환 애니메이션 타이밍 함수
  */
 export interface StackRendererProps {
   className?: string;
@@ -62,7 +65,7 @@ export interface StackRendererProps {
  * 스택 네비게이션 props
  * @property initialStack - 초기 화면 스택 배열 (각 항목은 {key, element} 형태)
  * @property children - 추가 자식 컴포넌트
- * @property className - 스택 컨테이너에 적용할 CSS 클래스
+ * @property className - 스택 컨테이너에 적용할 CSS 클래스 (일반 CSS 또는 Tailwind CSS 클래스 지원)
  * @property transitionDuration - 화면 전환 애니메이션 시간 (ms)
  * @property transitionTimingFunction - 화면 전환 애니메이션 타이밍 함수
  */

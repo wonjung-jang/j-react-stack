@@ -4,7 +4,21 @@ import { StackRendererProps } from "../types/index";
 
 /**
  * 스택의 현재 상태를 화면에 렌더링하는 컴포넌트
+ *
+ * Tailwind CSS 클래스를 지원합니다. className 속성을 통해 제공된 Tailwind 클래스는
+ * 스택 컨테이너에 적용됩니다.
+ *
+ * @example
+ * ```tsx
+ * <StackRenderer
+ *   className="bg-white dark:bg-slate-800 rounded-xl shadow-lg"
+ * />
+ * ```
+ *
  * @param props StackRendererProps
+ * @param props.className - CSS 클래스명 (일반 CSS 또는 Tailwind CSS 클래스 지원)
+ * @param props.transitionDuration - 전환 애니메이션 시간 (ms)
+ * @param props.transitionTimingFunction - 전환 애니메이션 타이밍 함수
  * @returns React 컴포넌트
  */
 export const StackRenderer: React.FC<StackRendererProps> = ({

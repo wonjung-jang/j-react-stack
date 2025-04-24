@@ -22,6 +22,7 @@ yarn add j-react-stack
 - 🧭 **간단한 push/pop 네비게이션 API**
 - 💡 **TypeScript 완벽 지원**
 - 🛠 **초기 화면 필수 설정으로 안정성 확보**
+- 🎨 **Tailwind CSS 지원**
 
 ---
 
@@ -109,6 +110,23 @@ function MyScreen() {
 ---
 
 ## 🎨 고급 사용법
+
+### Tailwind CSS 적용하기
+
+컴포넌트에 Tailwind CSS 클래스를 직접 적용할 수 있습니다:
+
+```tsx
+<StackNavigation
+  initialStack={[{ key: "home", element: <HomeScreen /> }]}
+  className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden"
+/>
+```
+
+StackRenderer 컴포넌트에도 적용 가능합니다:
+
+```tsx
+<StackRenderer className="bg-white dark:bg-slate-800 rounded-xl shadow-lg" />
+```
 
 ### 커스텀 트랜지션
 
