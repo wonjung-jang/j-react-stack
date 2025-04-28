@@ -1,7 +1,7 @@
 {
   "name": "j-react-stack",
-  "version": "0.1.3",
-  "description": "React 환경에서 스택 기반 화면 전환을 쉽고 부드럽게 구현할 수 있는 경량 네비게이션 라이브러리",
+  "version": "0.2.0",
+  "description": "React 및 Next.js 환경에서 스택 기반 화면 전환을 쉽고 부드럽게 구현할 수 있는 경량 네비게이션 라이브러리",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -19,7 +19,9 @@
     "react",
     "navigation",
     "stack",
-    "transition"
+    "transition",
+    "nextjs",
+    "tailwindcss"
   ],
   "author": "wonjung-jang <jangexpedition@gmail.com>",
   "license": "MIT",
