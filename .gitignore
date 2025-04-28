@@ -41,9 +41,3 @@ Thumbs.db
 # Lock files
 # package-lock.json
 # yarn.lock 
-
-# Examples build and dependencies
-examples/*/node_modules/
-examples/*/dist/
-examples/*/build/
-examples/*/.cache/ 

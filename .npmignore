@@ -15,9 +15,6 @@ __tests__
 *.test.ts
 *.test.tsx
 
-# Examples
-examples
-
 # IDE
 .vscode
 .idea
