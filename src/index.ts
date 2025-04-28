@@ -13,9 +13,10 @@ export type {
 } from "./types";
 
 // 사용 편의성을 위한 타입 유틸리티
+import type { ReactNode } from "react";
 export type StackItem = {
   key: string;
-  element: React.ReactNode;
+  element: ReactNode;
 };
 
 // 모든 타입 내보내기

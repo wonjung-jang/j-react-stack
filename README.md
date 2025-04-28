@@ -66,6 +66,7 @@ export default function App() {
 스택을 조작하고 상태를 제어할 수 있는 커스텀 훅입니다.
 
 ```tsx
+"use client";
 import { useStackNavigation } from "j-react-stack";
 import NextStepScreen from "./NextStepScreen";
 
@@ -194,6 +195,6 @@ const activity: Activity = {
 
 ---
 
-## �� 라이선스
+## 🎯 라이선스
 
 MIT License
