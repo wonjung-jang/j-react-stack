@@ -3,6 +3,14 @@
 React와 Next.js 애플리케이션에서 스택 기반 전환을 쉽게 구현할 수 있는 경량 라이브러리입니다.
 페이지 전환, 일부 컴포넌트 전환, 스와이프 UI 등 다양한 상황에 유연하게 적용할 수 있습니다.
 
+[![NPM](https://img.shields.io/npm/v/j-react-stack.svg)](https://www.npmjs.com/package/j-react-stack)
+[![GitHub](https://img.shields.io/github/stars/wonjung-jang/j-react-stack?style=social)](https://github.com/wonjung-jang/j-react-stack)
+
+> 📦 **패키지 링크**
+>
+> - NPM: [https://www.npmjs.com/package/j-react-stack](https://www.npmjs.com/package/j-react-stack)
+> - GitHub: [https://github.com/wonjung-jang/j-react-stack](https://github.com/wonjung-jang/j-react-stack)
+
 ## 📋 개요
 
 J-React-Stack은 부드러운 전환 애니메이션과 직관적인 API를 제공하여 복잡한 상태 관리 없이 자연스러운 화면 전환을 구현할 수 있도록 돕습니다.
