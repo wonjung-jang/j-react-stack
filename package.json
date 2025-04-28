@@ -1,6 +1,6 @@
 {
   "name": "j-react-stack",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "React와 Next.js(App Router 포함) 환경에서 스택 기반 화면 전환을 쉽고 부드럽게 구현할 수 있는 경량 UI 컴포넌트 라이브러리",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
