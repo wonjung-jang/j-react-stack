@@ -20,3 +20,6 @@ export type StackItem = {
 
 // 모든 타입 내보내기
 export * from "./types";
+
+// Next.js 엔트리포인트
+export * as next from "./next";

@@ -23,6 +23,7 @@ yarn add j-react-stack
 - 💡 **TypeScript 완벽 지원**
 - 🛠 **초기 화면 필수 설정으로 안정성 확보**
 - 🎨 **Tailwind CSS 지원**
+- 🔄 **React와 Next.js 모두 지원**
 
 ---
 
@@ -111,6 +112,36 @@ function MyScreen() {
 
 ## 🎨 고급 사용법
 
+### Next.js에서 사용하기
+
+Next.js 13 이상의 App Router에서는 별도의 엔트리포인트를 사용합니다:
+
+```tsx
+// Next.js App Router에서 사용하기 (클라이언트 컴포넌트에서)
+import { next } from "j-react-stack";
+
+export default function NextJsPage() {
+  // next 네임스페이스를 통해 접근
+  return (
+    <next.StackNavigation
+      initialStack={[{ key: "home", element: <HomeScreen /> }]}
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-md"
+    />
+  );
+}
+
+// 훅 사용
+("use client");
+import { next } from "j-react-stack";
+
+function ClientComponent() {
+  const { push, pop } = next.useStackNavigation();
+  // ...
+}
+```
+
+Pages Router를 사용하는 경우는 일반 React와 동일하게 사용할 수 있습니다.
+
 ### Tailwind CSS 적용하기
 
 컴포넌트에 Tailwind CSS 클래스를 직접 적용할 수 있습니다:
@@ -163,6 +194,6 @@ const activity: Activity = {
 
 ---
 
-## 📜 라이선스
+## �� 라이선스
 
 MIT License
