@@ -35,19 +35,22 @@ yarn add j-react-stack
 
 ### StackNavigation 컴포넌트
 
-스택 기반 전환 컨텍스트를 제공합니다.
+스택 기반 화면 전환을 위한 컨테이너 컴포넌트입니다. 페이지 내에서 컴포넌트 간 전환 애니메이션을 제공합니다.
 
 ```tsx
 import { StackNavigation } from "j-react-stack";
-import Step1Screen from "./Step1Screen";
+import FormStep1 from "./FormStep1";
 
-export default function App() {
+export default function FormContainer() {
   return (
-    <StackNavigation
-      initialStack={[{ key: "step1", element: <Step1Screen /> }]}
-      transitionDuration={300}
-      transitionTimingFunction="ease-in-out"
-    />
+    <div className="form-container">
+      <h1>다단계 양식</h1>
+      <StackNavigation
+        initialStack={[{ key: "step1", element: <FormStep1 /> }]}
+        transitionDuration={300}
+        transitionTimingFunction="ease-in-out"
+      />
+    </div>
   );
 }
 ```
@@ -56,27 +59,28 @@ export default function App() {
 
 ### useStackNavigation 훅 사용법
 
-스택 상태를 조작할 수 있는 커스텀 훅입니다.
+스택 내 화면 전환을 제어하는 커스텀 훅입니다.
 
 ```tsx
 "use client"; // Next.js App Router 사용 시 필요
 
 import { useStackNavigation } from "j-react-stack";
-import NextStepScreen from "./NextStepScreen";
+import FormStep2 from "./FormStep2";
 
-function MyScreen() {
+function FormStep1() {
   const { push, pop, clear, stack } = useStackNavigation();
 
+  const handleNextStep = () => {
+    // 양식 검증 후 다음 단계로 전환
+    push({ key: "step2", element: <FormStep2 /> });
+  };
+
   return (
-    <div>
-      <h2>현재 화면</h2>
-      <button
-        onClick={() => push({ key: "next", element: <NextStepScreen /> })}
-      >
-        다음
-      </button>
-      <button onClick={pop}>이전</button>
-      <button onClick={clear}>처음으로</button>
+    <div className="form-step">
+      <h2>1단계: 기본 정보</h2>
+      <input type="text" placeholder="이름" />
+      <input type="email" placeholder="이메일" />
+      <button onClick={handleNextStep}>다음 단계</button>
     </div>
   );
 }
@@ -115,15 +119,16 @@ function MyScreen() {
 
 ## ⚡ React Router와 병행 사용하기
 
-J-React-Stack은 React Router와 함께 사용할 수 있으며, 개별 페이지 컴포넌트 안에서 필요할 때만 적용합니다.
+J-React-Stack은 React Router와 함께 사용할 수 있습니다. React Router는 페이지 간 전환을 담당하고, J-React-Stack은 페이지 내에서 컴포넌트 간 전환을 담당합니다.
 
-### 기본 라우팅 예시
+### 실제 통합 사용 예시
 
 ```tsx
-// App.tsx
+// App.tsx - React Router로 전체 앱 라우팅 구성
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./HomePage";
 import ProfilePage from "./ProfilePage";
+import CheckoutPage from "./CheckoutPage";
 
 export default function App() {
   return (
@@ -131,34 +136,71 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </BrowserRouter>
   );
 }
 ```
 
-### 페이지 컴포넌트 내부에서 StackNavigation 적용
-
 ```tsx
-// HomePage.tsx
+// CheckoutPage.tsx - 페이지 내에서 J-React-Stack으로 스텝 전환 구현
 import { StackNavigation } from "j-react-stack";
-import MainScreen from "./MainScreen";
-import DetailScreen from "./DetailScreen";
+import DeliveryInfoStep from "./steps/DeliveryInfoStep";
 
-export default function HomePage() {
+export default function CheckoutPage() {
   return (
-    <div>
-      <h1>홈 페이지</h1>
+    <div className="checkout-container">
+      <h1>결제 프로세스</h1>
+
+      {/* 페이지 내에서 J-React-Stack으로 다단계 프로세스 구현 */}
       <StackNavigation
-        initialStack={[{ key: "main", element: <MainScreen /> }]}
-        className="mt-4"
+        initialStack={[
+          {
+            key: "delivery",
+            element: <DeliveryInfoStep />,
+          },
+        ]}
+        className="bg-white p-4 rounded-lg shadow-md"
       />
     </div>
   );
 }
 ```
 
-✅ StackNavigation은 라우팅된 페이지 컴포넌트 내부에 독립적으로 설치합니다.
+```tsx
+// steps/DeliveryInfoStep.tsx - 스택 내 첫 번째 화면
+import { useStackNavigation } from "j-react-stack";
+import PaymentStep from "./PaymentStep";
+
+export default function DeliveryInfoStep() {
+  const { push } = useStackNavigation();
+
+  const handleContinue = () => {
+    // 배송 정보 검증 후 결제 단계로 전환
+    push({ key: "payment", element: <PaymentStep /> });
+  };
+
+  return (
+    <div className="step-container">
+      <h2>1. 배송 정보</h2>
+      <form>
+        <input type="text" placeholder="주소" className="w-full mb-2" />
+        <input type="text" placeholder="연락처" className="w-full mb-4" />
+        <button
+          type="button"
+          onClick={handleContinue}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          결제 정보 입력
+        </button>
+      </form>
+    </div>
+  );
+}
+```
+
+이 예제에서 React Router는 `/checkout`과 같은 URL 기반 페이지 이동을 처리하고, J-React-Stack은 체크아웃 페이지 내에서 배송 정보 → 결제 정보 → 주문 확인과 같은 단계별 UI 전환을 처리합니다.
 
 ## 🎨 고급 사용법
 
