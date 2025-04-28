@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useStackStateContext } from "../context/contexts";
 import { StackRendererProps } from "../types/index";

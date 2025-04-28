@@ -165,11 +165,12 @@ export default function HomePage() {
 ### Next.js(App Router) 환경 사용
 
 ```tsx
-import { next } from "j-react-stack";
+"use client";
+import { StackNavigation } from "j-react-stack";
 
 export default function NextJsPage() {
   return (
-    <next.StackNavigation
+    <StackNavigation
       initialStack={[{ key: "home", element: <HomeScreen /> }]}
       className="bg-white dark:bg-gray-800 rounded-xl shadow-md"
     />
@@ -179,14 +180,14 @@ export default function NextJsPage() {
 
 ```tsx
 "use client";
-import { next } from "j-react-stack";
+import { useStackNavigation } from "j-react-stack";
 
 function ClientComponent() {
-  const { push, pop } = next.useStackNavigation();
+  const { push, pop } = useStackNavigation();
 }
 ```
 
-Pages Router 환경에서는 next 네임스페이스 없이 사용합니다.
+모든 컴포넌트에 'use client' 지시문이 내장되어 있으므로 Pages Router와 App Router 모두 동일한 import 방식을 사용합니다.
 
 ### Tailwind CSS 적용 예시
 
