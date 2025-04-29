@@ -15,7 +15,9 @@
     "test": "vitest",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "type-check": "tsc --noEmit",
+    "lint-staged": "lint-staged"
   },
   "keywords": [
     "react",
@@ -61,7 +63,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "tsc --noEmit",
+      "tsc --noEmit --project tsconfig.json",
       "eslint --fix",
       "prettier --write"
     ]
