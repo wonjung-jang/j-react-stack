@@ -40,7 +40,7 @@ export const StackNavigation: React.FC<StackNavigationProps> = ({
   }
 
   return (
-    <StackProvider initialStack={}>
+    <StackProvider initialStack={initialStack}>
       <StackRenderer
         className={className}
         transitionDuration={transitionDuration}
