@@ -38,7 +38,6 @@ export interface StackActionContextType {
   push: (activity: Omit<Activity, "transition" | "direction">) => void;
   pop: () => void;
   clear: () => void;
-  init: (activities: Omit<Activity, "transition" | "direction">[]) => void;
 }
 
 /**

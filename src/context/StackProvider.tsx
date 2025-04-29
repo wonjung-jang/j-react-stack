@@ -94,60 +94,47 @@ export const StackProvider: React.FC<StackProviderProps> = ({
   }, []);
 
   /**
-   * 스택 초기화
-   * @param activities 초기 액티비티 배열
-   */
-  const init = useCallback(
-    (activities: Omit<Activity, "transition" | "direction">[]) => {
-      // 빈 배열이 들어와도 최소 하나의 스크린은 있어야 함
-      if (activities.length === 0) {
-        console.warn(
-          "초기화 시 최소 하나의 화면이 필요합니다. initialStack을 사용합니다."
-        );
-        activities = initialStack as Omit<
-          Activity,
-          "transition" | "direction"
-        >[];
-      }
-
-      const newStack = activities.map((activity, i) => {
-        const isLast = i === activities.length - 1;
-        return {
-          ...activity,
-          transition: isLast
-            ? ("current" as TransitionState)
-            : ("animating" as TransitionState),
-          direction: isLast
-            ? ("right" as TransitionDirection)
-            : ("left" as TransitionDirection),
-        };
-      });
-
-      setStack(newStack);
-    },
-    [initialStack]
-  );
-
-  /**
    * 스택을 초기 상태로 리셋
    */
   const clear = useCallback(() => {
-    // 완전히 비우지 않고 초기 스택으로 리셋
-    init(initialStack as Omit<Activity, "transition" | "direction">[]);
-  }, [init, initialStack]);
+    const activities = initialStack as Omit<
+      Activity,
+      "transition" | "direction"
+    >[];
+
+    // 빈 배열이 들어와도 최소 하나의 스크린은 있어야 함
+    if (activities.length === 0) {
+      console.warn(
+        "초기화 시 최소 하나의 화면이 필요합니다. initialStack을 사용합니다."
+      );
+      return;
+    }
+
+    const newStack = activities.map((activity, i) => {
+      const isLast = i === activities.length - 1;
+      return {
+        ...activity,
+        transition: isLast
+          ? ("current" as TransitionState)
+          : ("animating" as TransitionState),
+        direction: isLast
+          ? ("right" as TransitionDirection)
+          : ("left" as TransitionDirection),
+      };
+    });
+
+    setStack(newStack);
+  }, [initialStack]);
 
   // 컴포넌트 마운트 시 초기화
   useEffect(() => {
     if (stack.length === 0) {
-      init(initialStack as Omit<Activity, "transition" | "direction">[]);
+      clear();
     }
-  }, [initialStack, init, stack.length]);
+  }, [clear, stack.length]);
 
   const stateValue = useMemo(() => ({ stack }), [stack]);
-  const actionValue = useMemo(
-    () => ({ push, pop, clear, init }),
-    [push, pop, clear, init]
-  );
+  const actionValue = useMemo(() => ({ push, pop, clear }), [push, pop, clear]);
 
   return (
     <StackStateContext.Provider value={stateValue}>

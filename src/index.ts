@@ -18,6 +18,3 @@ export type StackItem = {
   key: string;
   element: ReactNode;
 };
-
-// 모든 타입 내보내기
-export * from "./types";

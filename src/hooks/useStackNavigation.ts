@@ -11,13 +11,12 @@ import {
  */
 export const useStackNavigation = () => {
   const { stack } = useStackStateContext();
-  const { push, pop, clear, init } = useStackActionContext();
+  const { push, pop, clear } = useStackActionContext();
 
   return {
     stack,
     push,
     pop,
     clear,
-    init,
   };
 };
