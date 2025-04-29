@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  useStackStateContext,
-  useStackActionContext,
-} from "../context/contexts";
+import { useStackStateContext, useStackActionContext } from "../context/contexts";
 
 /**
  * 스택 네비게이션 기능을 사용하기 위한 훅
@@ -13,10 +10,5 @@ export const useStackNavigation = () => {
   const { stack } = useStackStateContext();
   const { push, pop, clear } = useStackActionContext();
 
-  return {
-    stack,
-    push,
-    pop,
-    clear,
-  };
+  return { stack, push, pop, clear };
 };
