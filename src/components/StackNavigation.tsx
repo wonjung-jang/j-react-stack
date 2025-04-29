@@ -36,13 +36,11 @@ export const StackNavigation: React.FC<StackNavigationProps> = ({
 }) => {
   // 런타임에 initialStack 체크
   if (!initialStack || initialStack.length === 0) {
-    throw new Error(
-      "StackNavigation requires at least one item in initialStack"
-    );
+    throw new Error("StackNavigation requires at least one item in initialStack");
   }
 
   return (
-    <StackProvider initialStack={initialStack}>
+    <StackProvider initialStack={}>
       <StackRenderer
         className={className}
         transitionDuration={transitionDuration}
